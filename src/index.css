@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream text-brand-dark font-sans antialiased selection:bg-yellow selection:text-brand-dark;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/60 backdrop-blur-md border border-white/40 shadow-xl;
+  }
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-sm border border-white/50 shadow-md hover:shadow-lg transition-all duration-300;
+  }
+  .btn-primary {
+    @apply bg-red hover:bg-red-hover text-white px-6 py-2 rounded-full font-medium transition-colors shadow-md hover:shadow-lg;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-brand-dark px-6 py-2 rounded-full font-medium border border-gray-200 transition-colors shadow-sm;
+  }
+}
