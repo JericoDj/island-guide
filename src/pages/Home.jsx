@@ -25,7 +25,7 @@ export default function Home() {
                         </p>
 
                         {/* Quick Search Glass Panel */}
-                        <div className="glass-panel p-4 rounded-3xl mt-8 flex flex-col sm:flex-row gap-4">
+                        <div className="glass-panel p-4 rounded-3xl mt-8 flex flex-col sm:flex-row gap-4 relative z-0">
                             <div className="flex-1 px-4 py-2 border-b sm:border-b-0 sm:border-r border-gray-200">
                                 <label className="text-xs font-bold text-brand-muted uppercase tracking-wider mb-1 block">Location</label>
                                 <div className="flex items-center gap-2 text-brand-dark">
@@ -54,7 +54,7 @@ export default function Home() {
                     </div>
 
                     {/* Hero Images Grid */}
-                    <div className="relative h-[500px] sm:h-[600px] w-full hidden md:block z-10">
+                    <div className="relative h-[500px] sm:h-[600px] w-full hidden md:block relative z-50">
                         {/* Background Blob decoration */}
                         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-white/40 blur-3xl rounded-full -z-10" />
 
