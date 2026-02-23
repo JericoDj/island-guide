@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, Search, User } from 'lucide-react';
 import { cn } from '../../utils/utils';
+import { useAuth } from '../../context/AuthContext';
+import AuthModal from '../domain/AuthModal';
 
 export default function Navbar() {
+    const { user } = useAuth();
+    const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [authView, setAuthView] = useState('login');
+
+    const openAuth = (view) => {
+        setAuthView(view);
+        setIsAuthModalOpen(true);
+    };
     return (
         <header className="sticky top-0 z-50 w-full animate-fade-in">
             {/* Decorative top bar */}
@@ -40,18 +50,35 @@ export default function Navbar() {
 
                 {/* Right Actions */}
                 <div className="flex items-center gap-4">
-                    <nav className="hidden md:flex items-center gap-6 mr-4 font-medium text-brand-muted">
-                        <Link to="/explore" className="hover:text-brand-dark transition-colors">Explore</Link>
-                        <Link to="/guides" className="hover:text-brand-dark transition-colors">Guides</Link>
-                        <Link to="/bookings" className="hover:text-brand-dark transition-colors">Bookings</Link>
+                    <nav className="hidden md:flex items-center gap-6 mr-4 font-bold text-green">
+                        <Link to="/explore" className="hover:text-green-hover transition-colors">Islands</Link>
+                        <Link to="/experiences" className="hover:text-green-hover transition-colors">Experiences</Link>
+                        <Link to="/become-guide" className="hover:text-green-hover transition-colors">Become a Local Guide</Link>
                     </nav>
 
-                    <button className="hidden sm:flex items-center gap-2 p-1.5 pr-4 rounded-full border border-gray-200 bg-white/50 hover:bg-white/80 transition-colors shadow-sm">
-                        <div className="w-8 h-8 rounded-full bg-yellow/30 flex items-center justify-center text-yellow">
-                            <User size={16} />
+                    {user ? (
+                        <button className="hidden sm:flex items-center gap-3 p-1.5 pr-4 rounded-full border border-gray-200 bg-white/80 hover:bg-white transition-colors shadow-sm">
+                            <div className="w-8 h-8 rounded-full bg-yellow/20 flex items-center justify-center text-yellow">
+                                <User size={16} />
+                            </div>
+                            <span className="text-sm font-bold text-brand-dark">{user.name}</span>
+                        </button>
+                    ) : (
+                        <div className="hidden sm:flex items-center gap-4">
+                            <button
+                                onClick={() => openAuth('login')}
+                                className="font-bold text-green hover:text-green-hover transition-colors px-2"
+                            >
+                                Log In
+                            </button>
+                            <button
+                                onClick={() => openAuth('signup')}
+                                className="bg-[#DF7C63] hover:bg-[#D06C54] text-white px-6 py-2.5 rounded-full font-bold shadow-md hover:shadow-lg transition-all"
+                            >
+                                Sign Up
+                            </button>
                         </div>
-                        <span className="text-sm font-medium">Log In</span>
-                    </button>
+                    )}
 
                     <button className="md:hidden p-2 text-brand-dark rounded-full hover:bg-black/5 transition-colors">
                         <Menu size={24} />
@@ -59,6 +86,12 @@ export default function Navbar() {
                 </div>
 
             </div>
+
+            <AuthModal
+                isOpen={isAuthModalOpen}
+                onClose={() => setIsAuthModalOpen(false)}
+                initialView={authView}
+            />
         </header>
     );
 }

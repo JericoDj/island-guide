@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
             setToken(storedToken);
             setUser({
                 id: 'mock-uuid-123',
+                name: 'Guest User',
                 role: 'CUSTOMER', // Roles: CUSTOMER, PROVIDER, DISPATCHER, ADMIN
                 email: 'user@example.com',
                 tier: 'Silver',
@@ -32,6 +33,7 @@ export function AuthProvider({ children }) {
         setToken(mockToken);
         setUser({
             id: 'mock-uuid-123',
+            name: email.split('@')[0], // dynamically set name based on email
             role: 'CUSTOMER',
             email,
             tier: 'Silver',
