@@ -9,6 +9,7 @@ import DispatchDashboard from './pages/DispatchDashboard';
 import BookingCheckout from './pages/BookingCheckout';
 import ProviderSchedule from './pages/ProviderSchedule';
 import ChatWidget from './components/domain/ChatWidget';
+import Footer from './components/layout/Footer';
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
               {/* Global Realtime Features */}
               <ChatWidget roomId="room-123" guideName="Mateo R." />
             </main>
+
+            <Footer />
           </div>
         </Router>
       </SocketProvider>
